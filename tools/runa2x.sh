@@ -42,7 +42,7 @@ export LC_ALL
 TZ=UTC
 export TZ
 
-PATH=/usr/bin
+#PATH=/usr/bin
 export PATH
 
 PYTHONHOME=/
