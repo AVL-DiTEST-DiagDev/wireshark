@@ -43,6 +43,7 @@ build_script:
   - cmake -DENABLE_CHM_GUIDES=on -G "Visual Studio 12" c:\projects\wireshark
   - msbuild /m /p:Configuration=RelWithDebInfo Wireshark.sln
   - echo Creating Wireshark installer ...
+  - cmd: copy /Y c:\projects\wireshark\supporting-files\Visual Studio 12\vcredist_x86.exe c:\projects\wireshark\wireshark-win32-libs\
   - msbuild /m /p:Configuration=RelWithDebInfo nsis_package_prep.vcxproj
   - msbuild /m /p:Configuration=RelWithDebInfo nsis_package.vcxproj
 
