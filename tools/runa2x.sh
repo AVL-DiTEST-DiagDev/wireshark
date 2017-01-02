@@ -50,4 +50,4 @@ export PYTHONHOME
 
 echo "running a2x with args $@"
 
-a2x "$@"
+a2x -v -v "$@"
