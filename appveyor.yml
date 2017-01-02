@@ -28,7 +28,7 @@ before_build:
   # run the adjustment scripts
   - ps: Invoke-WebRequest -Uri https://cygwin.com/setup-x86.exe -OutFile c:\projects\cygwin-setup.exe
   - mkdir c:\projects\cyg-packages
-  - c:\projects\cygwin-setup.exe -q -n -N -d -R C:\cygwin -s http://ftp.hawo.stw.uni-erlangen.de/cygwin/ -l c:\projects\cyg-packages -P  flex -P bison -P asciidoc -P docbook-xml45 -P w3m
+  - c:\projects\cygwin-setup.exe -q -n -N -d -R C:\cygwin -s http://ftp.hawo.stw.uni-erlangen.de/cygwin/ -l c:\projects\cyg-packages -P  flex -P bison -P asciidoc -P docbook-xml45 -P w3m -P libxslt
   - cmd: set WIRESHARK_CYGWIN_INSTALL_PATH=C:\cygwin
 
 build_script:
@@ -36,7 +36,7 @@ build_script:
   - mkdir c:\projects\wiresharkBuild
   - cd  c:\projects\wiresharkBuild
   - echo Building Wireshark ...
-  - cmake -D ENABLE_CHM_GUIDES=off -D ENABLE_HTML_GUIDES=off -D ENABLE_PDF_GUIDES=off -G "Visual Studio 14" c:\projects\wireshark
+  - cmake -DENABLE_CHM_GUIDES=off -DENABLE_HTML_GUIDES=off -DENABLE_PDF_GUIDES=off -G "Visual Studio 14" c:\projects\wireshark
   - msbuild /m /p:Configuration=RelWithDebInfo Wireshark.sln
   - echo Creating Wireshark installer ...
   - cmd: copy /Y c:\projects\wireshark\supporting-files\Visual Studio 14\vcredist_x86.exe c:\projects\wireshark\wireshark-win32-libs\
