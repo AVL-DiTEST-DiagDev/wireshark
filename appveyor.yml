@@ -28,7 +28,7 @@ before_build:
   # run the adjustment scripts
   - ps: Invoke-WebRequest -Uri https://cygwin.com/setup-x86.exe -OutFile c:\projects\cygwin-setup.exe
   - mkdir c:\projects\cyg-packages
-  - c:\projects\cygwin-setup.exe -q -n -N -d -R C:\cygwin -s http://ftp.hawo.stw.uni-erlangen.de/cygwin/ -l c:\projects\cyg-packages -P  flex -P bison -P asciidoc -P docbook-xml45
+  - c:\projects\cygwin-setup.exe -q -n -N -d -R C:\cygwin -s http://ftp.hawo.stw.uni-erlangen.de/cygwin/ -l c:\projects\cyg-packages -P  flex -P bison -P asciidoc -P docbook-xml45 -P w3m
   - cmd: set WIRESHARK_CYGWIN_INSTALL_PATH=C:\cygwin
 
 build_script:
