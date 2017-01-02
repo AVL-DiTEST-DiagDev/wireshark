@@ -23,7 +23,7 @@ before_build:
   - cmd: set CYGWIN=nodosfilewarning
   - cmd: set WIRESHARK_BASE_DIR=c:\projects
   - cmd: set WIRESHARK_TARGET_PLATFORM=win32
-  - cmd: set QT5_BASE_DIR=c:\Qt\5.6\msvc2013
+  - cmd: set QT5_BASE_DIR=c:\Qt\5.6\msvc2015
   - cmd: set WIRESHARK_VERSION_EXTRA=-AVL-DITEST
   # run the adjustment scripts
   - ps: Invoke-WebRequest -Uri https://cygwin.com/setup-x86.exe -OutFile c:\projects\cygwin-setup.exe
@@ -36,10 +36,10 @@ build_script:
   - mkdir c:\projects\wiresharkBuild
   - cd  c:\projects\wiresharkBuild
   - echo Building Wireshark ...
-  - cmake -DENABLE_CHM_GUIDES=on -G "Visual Studio 12" c:\projects\wireshark
+  - cmake -DENABLE_CHM_GUIDES=on -G "Visual Studio 14" c:\projects\wireshark
   - msbuild /m /p:Configuration=RelWithDebInfo Wireshark.sln
   - echo Creating Wireshark installer ...
-  - cmd: copy /Y c:\projects\wireshark\supporting-files\Visual Studio 12\vcredist_x86.exe c:\projects\wireshark\wireshark-win32-libs\
+  - cmd: copy /Y c:\projects\wireshark\supporting-files\Visual Studio 14\vcredist_x86.exe c:\projects\wireshark\wireshark-win32-libs\
   - msbuild /m /p:Configuration=RelWithDebInfo nsis_package_prep.vcxproj
   - msbuild /m /p:Configuration=RelWithDebInfo nsis_package.vcxproj
 
