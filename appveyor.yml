@@ -1,0 +1,54 @@
+version: '0.0.1-{build}'
+
+clone_folder: c:\projects\wireshark
+
+environment:
+  CYG_ROOT: C:\cygwin
+
+# script after cloning repo:
+install:
+  - echo Install Script now!
+  - mkdir c:\own-download
+  - cd c:\own-download
+
+platform:
+  - win32
+  
+before_build:
+  - echo BeforeBuild Script now!
+  # add Cygwin to PATH
+  - set PATH=%PATH%;C:\cygwin\bin\
+  - set PATH=C:\cygwin\bin\;%PATH%
+  # set necessary environment variables: 
+  - cmd: set CYGWIN=nodosfilewarning
+  - cmd: set WIRESHARK_BASE_DIR=c:\projects
+  - cmd: set WIRESHARK_TARGET_PLATFORM=win32
+  - cmd: set QT5_BASE_DIR=c:\Qt\5.6\msvc2013
+  - cmd: set WIRESHARK_VERSION_EXTRA=-AVL-DITEST
+  # insert our pluginfiles to wireshark
+  - cmd: xcopy /E c:\projects\ws-plugin\src\plugins plugins
+  # insert scripts for option adjustment and adding doip to CMakeLists.txt
+  - cmd: copy /Y c:\projects\ws-plugin\build_win\* .
+  # run the adjustment scripts
+  - ps: Invoke-WebRequest -Uri https://cygwin.com/setup-x86.exe -OutFile c:\projects\cygwin-setup.exe
+  - mkdir c:\projects\cyg-packages
+  - c:\projects\cygwin-setup.exe -q -n -N -d -R C:\cygwin -s http://ftp.hawo.stw.uni-erlangen.de/cygwin/ -l c:\projects\cyg-packages -P  flex -P bison
+  - cmd: set WIRESHARK_CYGWIN_INSTALL_PATH=C:\cygwin
+
+build_script:
+  - echo Build Script now!
+  - mkdir c:\projects\wiresharkBuild
+  - cd  c:\projects\wiresharkBuild
+  - echo Building Wireshark ...
+  - cmake -DENABLE_CHM_GUIDES=on -G "Visual Studio 12" c:\projects\wireshark
+  - msbuild /m /p:Configuration=RelWithDebInfo Wireshark.sln
+  - echo Creating Wireshark installer ...
+  - msbuild /m /p:Configuration=RelWithDebInfo nsis_package_prep.vcxproj
+  - msbuild /m /p:Configuration=RelWithDebInfo nsis_package.vcxproj
+
+after_build:
+# Push latest Wireshark installer
+  - ps: Push-AppveyorArtifact c:\projects\wireshark\packaging\nsis\Wireshark-*.exe
+
+on_failure:
+  - echo FAILURE! Nothing will be done.
