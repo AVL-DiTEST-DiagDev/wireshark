@@ -478,17 +478,19 @@ endif()
 
 # release_notes: release-notes.html release-notes.txt release-notes-a4.pdf release-notes-us.pdf
 
-add_custom_target( release_notes_html DEPENDS ws.css release-notes.html )
-set_target_properties(release_notes_html PROPERTIES FOLDER "Docbook")
+#add_custom_target( release_notes_html DEPENDS ws.css release-notes.html )
+#set_target_properties(release_notes_html PROPERTIES FOLDER "Docbook")
 add_custom_target( release_notes_txt DEPENDS release-notes.txt )
 set_target_properties(release_notes_txt PROPERTIES FOLDER "Docbook")
 
 # Force serial execution so that separate a2x instances don't trip on each other
-add_dependencies ( release_notes_txt release_notes_html )
+#add_dependencies ( release_notes_txt release_notes_html )
+add_dependencies ( release_notes_txt )
 
 add_custom_target( release_notes )
 set_target_properties(release_notes PROPERTIES FOLDER "Docbook")
-add_dependencies ( release_notes release_notes_txt release_notes_html )
+#add_dependencies ( release_notes release_notes_txt release_notes_html )
+add_dependencies ( release_notes release_notes_txt )
 
 add_custom_target(
 	news
@@ -500,11 +502,11 @@ add_custom_target(
 )
 set_target_properties(news PROPERTIES FOLDER "Docbook")
 
-ASCIIDOC2HTML(
-	release-notes.html
-	release-notes.asciidoc
-	"${ASCIIDOC_CONF_FILES}"
-)
+#ASCIIDOC2HTML(
+#	release-notes.html
+#	release-notes.asciidoc
+#	"${ASCIIDOC_CONF_FILES}"
+#)
 
 ASCIIDOC2TXT(
 	release-notes.txt
