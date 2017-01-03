@@ -26,9 +26,7 @@ before_build:
   - cmd: set QT5_BASE_DIR=c:\Qt\5.6\msvc2015
   - cmd: set WIRESHARK_VERSION_EXTRA=-AVL-DITEST
   # run the adjustment scripts
-  - ps: Invoke-WebRequest -Uri https://cygwin.com/setup-x86.exe -OutFile c:\projects\cygwin-setup.exe
-  - mkdir c:\projects\cyg-packages
-  - c:\projects\cygwin-setup.exe -q -n -N -d -R C:\cygwin -s http://ftp.hawo.stw.uni-erlangen.de/cygwin/ -l c:\projects\cyg-packages -P  flex -P bison -P asciidoc -P docbook-xml45 -P w3m -P libxslt
+  - C:\cygwin\setup-x86.exe -qnNdO -R C:/cygwin -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P  flex -P bison -P asciidoc -P docbook-xml45 -P w3m -P libxslt
   - cmd: set WIRESHARK_CYGWIN_INSTALL_PATH=C:\cygwin
 
 build_script:
