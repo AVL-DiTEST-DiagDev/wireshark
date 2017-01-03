@@ -42,15 +42,12 @@ export LC_ALL
 TZ=UTC
 export TZ
 
-PATH=$PATH:/bin:/usr/bin
+PATH=/usr/bin
 export PATH
-echo "PATH=$PATH"
 
 PYTHONHOME=/
 export PYTHONHOME
 
-#echo "running a2x with args $@"
+echo "running a2x with args $@"
 
-#a2x -v -v "$@"
-
-echo "Workaround: Not running a2x - DISABLED"
+a2x -v -v "$@"

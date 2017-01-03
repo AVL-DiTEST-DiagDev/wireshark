@@ -26,7 +26,7 @@ before_build:
   - cmd: set QT5_BASE_DIR=c:\Qt\5.6\msvc2015
   - cmd: set WIRESHARK_VERSION_EXTRA=-AVL-DITEST
   # run the adjustment scripts
-  - C:\cygwin\setup-x86.exe -qnNdO -R C:/cygwin -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P  flex -P bison
+  - C:\cygwin\setup-x86.exe -qnNdO -R C:/cygwin -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P  flex -P bison -P asciidoc -P docbook-xml45 -P w3m -P libxslt
   - cmd: set WIRESHARK_CYGWIN_INSTALL_PATH=C:\cygwin
 
 build_script:
@@ -46,4 +46,7 @@ after_build:
   - ps: Push-AppveyorArtifact c:\projects\wireshark\packaging\nsis\Wireshark-*.exe
 
 on_failure:
-  - echo FAILURE! Nothing will be done.
+  - echo FAILURE!
+  - echo Zipping project directory
+  - ps: 7z a c:\projects\wiresharkBuild.zip c:\projects\wiresharkBuild
+  - ps: Push-AppveyorArtifact c:\projects\wiresharkBuild.zip
