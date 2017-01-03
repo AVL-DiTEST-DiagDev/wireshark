@@ -485,7 +485,6 @@ set_target_properties(release_notes_txt PROPERTIES FOLDER "Docbook")
 
 # Force serial execution so that separate a2x instances don't trip on each other
 #add_dependencies ( release_notes_txt release_notes_html )
-add_dependencies ( release_notes_txt )
 
 add_custom_target( release_notes )
 set_target_properties(release_notes PROPERTIES FOLDER "Docbook")
