@@ -34,7 +34,7 @@ build_script:
   - mkdir c:\projects\wiresharkBuild
   - cd  c:\projects\wiresharkBuild
   - echo Building Wireshark ...
-  - cmake -DENABLE_CHM_GUIDES=on -DENABLE_HTML_GUIDES=off -DENABLE_PDF_GUIDES=off -G "Visual Studio 14" c:\projects\wireshark
+  - cmake -DENABLE_CHM_GUIDES=off -DENABLE_HTML_GUIDES=off -DENABLE_PDF_GUIDES=off -G "Visual Studio 14" c:\projects\wireshark
   - msbuild /m /p:Configuration=RelWithDebInfo Wireshark.sln
   - echo Creating Wireshark installer ...
   - cmd: copy /Y c:\projects\wireshark\supporting-files\Visual Studio 14\vcredist_x86.exe c:\projects\wireshark\wireshark-win32-libs\
