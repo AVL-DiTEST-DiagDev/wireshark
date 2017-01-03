@@ -49,6 +49,8 @@ echo "PATH=$PATH"
 PYTHONHOME=/
 export PYTHONHOME
 
-echo "running a2x with args $@"
+#echo "running a2x with args $@"
 
-a2x -v -v "$@"
+#a2x -v -v "$@"
+
+echo "Workaround: Not running a2x - DISABLED"
