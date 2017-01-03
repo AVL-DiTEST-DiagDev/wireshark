@@ -37,7 +37,7 @@ build_script:
   - cmake -DENABLE_CHM_GUIDES=off -DENABLE_HTML_GUIDES=off -DENABLE_PDF_GUIDES=off -G "Visual Studio 14" c:\projects\wireshark
   - msbuild /m /p:Configuration=RelWithDebInfo Wireshark.sln
   - echo Creating Wireshark installer ...
-  - cmd: copy /Y c:\projects\wireshark\supporting-files\Visual Studio 14\vcredist_x86.exe c:\projects\wireshark\wireshark-win32-libs\
+  - cmd: copy /Y "c:\projects\wireshark\supporting-files\Visual Studio 14\vcredist_x86.exe" c:\projects\wireshark\wireshark-win32-libs\
   - msbuild /m /p:Configuration=RelWithDebInfo nsis_package_prep.vcxproj
   - msbuild /m /p:Configuration=RelWithDebInfo nsis_package.vcxproj
 
